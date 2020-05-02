@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Rimtay Installer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+	<div class="container" style="margin-top: 30px;">
+		<check if="{{@STEP===0}}">
+        <!-- Start: Step 0 Welcome -->
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Rimtay Installer</h4>
+                        <h6 class="text-muted card-subtitle mb-2">Welcome to Rimtay Installer. This installer will help you install/upgrade our software easily</h6>
+                        <p class="card-text">Before we start, it is highly recommended to read our documentations and our FAQ. Please click the FAQ button if you don't know how to get some necessary details this installer will ask you shortly :)<br>If you are ready, let's
+                            start...</p><a class="btn btn-success" role="button" href="?pg=1">Start</a><a class="btn btn-info text-left" role="button" href="https://cl.rimtay.com/assist" target="_blank" style="margin-left: 25px;">Read the FAQ</a></div>
+                </div>
+            </div>
+		</div>
+		<!-- End: Step 0 Welcome -->
+		</check>
+		<check if="{{@STEP==1}}">
+			<!-- Start: Step 1 SSL -->
+			<div class="row">
+				<div class="col">
+					<div class="card">
+						<div class="card-body">
+							<h4 class="card-title">Rimtay Installer (Step:1)</h4>
+							<h6 class="text-muted card-subtitle mb-2">SSL Settings Step</h6>
+							<p class="card-text">Do you want to use SSL in your system? If your web-site supports SSL. Our script can redirect all visitors to the SSL automatically. It is like Force SSL plugin in WordPress :) <br /><strong>Please make sure that your system supports SSL before selecting Force SSL option</strong></p>
+							<form method="post" action="?post=1">
+								<div class="form-group">
+									<label>SSL Option</label>
+									<select class="form-control" name="force_ssl">
+										<option value="0">I don't have SSL</option>
+										<option value="1">I have SSL and Force Redirect All Visitors to the Secure SSL</option>
+
+									</select>
+									<p class="text-muted help">Please make sure that you have an SSL before selecting this.</p>
+								</div>
+								<p class="text-danger font-weight-bold {{@INST_ERROR ? '' : 'd-none'}}">{{@INST_ERROR}}</p>
+								<button class="btn btn-primary" type="submit">Check the Code</button><a class="btn btn-info text-left" role="button"
+									href="https://cl.rimtay.com/assist" target="_blank" style="margin-left: 25px;">Read the FAQ</a>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End: Step 1 SSL -->
+		</check>
+		<check if="{{@STEP==2}}">
+        <!-- Start: STEP 2 Envato License Check -->
+        <div class="row">
+            <div class="col">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Rimtay Installer (Step:2)</h4>
+                        <h6 class="text-muted card-subtitle mb-2">License Check Step</h6>
+                        <p class="card-text">In this step we will need to check your License Code. If you don't know how to get your Envato License Code, you can read our FAQ. There is an article link to help you through.<br><strong>Please be aware that one Envato License Code can be only used in One Domain. If want to change the domain please contact with us.</strong></p>
+                        <form
+                            method="post" action="?post=2">
+							<div class="form-group"><label>Envato Purchase Code</label><input class="form-control" type="text" name="purchase_code" placeholder="Please enter your Envato purchase code."></div>
+							<p class="text-danger font-weight-bold {{@INST_ERROR ? '' : 'd-none'}}">{{@INST_ERROR}}</p>
+							<button class="btn btn-primary" type="submit">Check the Code</button><a class="btn btn-info text-left" role="button"
+								href="https://cl.rimtay.com/assist" target="_blank" style="margin-left: 25px;">Read the FAQ</a>
+							</form>
+						</div>
+                </div>
+            </div>
+        </div>
+		<!-- End: STEP 2 Envato License Check -->
+		</check>
+		<check if="{{@STEP==3}}">
+        <!-- Start: Step 3 MySQL Connection -->
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Rimtay Installer (Step:3)</h4>
+                        <h6 class="text-muted card-subtitle mb-2">MySQL Connection Step</h6>
+                        <p class="card-text">Your license is valid and good to go. Thanks for using a valid license! In this step we will connect software to the database. Please get ready your database details. If you don't know how to find these details, you can contact
+                            to your hosting company or read our FAQ. We have some article links over there.<br><strong>Please make sure that this database is fresh and empty. Otherwise system may give you errors.</strong></p>
+                        <form method="post" action="?post=3">
+                            <div class="form-group"><label>MySQL Server</label><input class="form-control" type="text" value="localhost" name="mysql_server"></div>
+                            <div class="form-group"><label>MySQL Database Name</label><input class="form-control" type="text" name="mysql_database"></div>
+                            <div class="form-group"><label>MySQL Username</label><input class="form-control" type="text" name="mysql_username"></div>
+                            <div class="form-group"><label>MySQL Password</label><input class="form-control" type="text" name="mysql_password"></div>
+							<div class="form-group"><label>MySQL Port</label><input class="form-control" type="text" value="3306" name="mysql_port"></div>
+							<p class="text-danger font-weight-bold {{@INST_ERROR ? '' : 'd-none'}}">{{@INST_ERROR| raw}}</p>
+							<button class="btn btn-primary" type="submit">Connect to the Database</button><a class="btn btn-info text-left"
+								role="button" href="https://cl.rimtay.com/assist" target="_blank" style="margin-left: 25px;">Read the FAQ</a>
+                        </form></div>
+                </div>
+            </div>
+        </div>
+		<!-- End: Step 3 MySQL Connection -->
+		</check>
+		<check if="{{@STEP==4}}">
+        <!-- Start: Step 4 Mail Informations -->
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Rimtay Installer (Step:4)</h4>
+                        <h6 class="text-muted card-subtitle mb-2">SMTP Connection &amp; Test Step</h6>
+                        <p class="card-text">Yay! Software is connected to the database and installed itself over there successfully!&nbsp;<br>In this step we will make SMTP connections together and test them. SMTP is really important for mail notifications. It is more reliable
+                            about reaching inboxes :)<br><strong>Do not worry. You will be able to change these settings later. If you don't want to use SMTP you can skip this step. But it is not recommended.</strong></p>
+                        <form method="post" action="?post=4">
+                            <div class="form-group"><label>Your Mail Address</label><input class="form-control" type="text" placeholder="order@example.com" name="admin_mail"></div>
+                            <div class="form-group"><label>SMTP Server</label><input class="form-control" type="text" placeholder="mail.example.com" name="smtp_server"></div>
+                            <div class="form-group"><label>SMTP Username</label><input class="form-control" type="text" placeholder="noreply@example.com" name="smtp_username"></div>
+                            <div class="form-group"><label>SMTP Password</label><input class="form-control" type="text" placeholder="secret-password" name="smtp_password"></div>
+                            <div class="form-group"><label>SMTP Port</label><input class="form-control" type="text" value="587" name="smtp_port"></div>
+							<div class="form-group"><label>SMTP Scheme</label><input class="form-control" type="text" value="tls" name="smtp_scheme"></div>
+							<p class="text-danger font-weight-bold {{@INST_ERROR ? '' : 'd-none'}}">{{@INST_ERROR | raw}}</p>
+							<button class="btn btn-primary" type="submit">Check SMTP and Continue</button><a class="btn btn-danger" role="button"
+								href="?pg=last" style="margin-left: 25px;">Skip This Step</a><a class="btn btn-info text-left" role="button"
+								href="https://cl.rimtay.com/assist" target="_blank" style="margin-left: 25px;">Read the FAQ</a>
+                        </form></div>
+                </div>
+            </div>
+        </div>
+		<!-- End: Step 4 Mail Informations -->
+		</check>
+		<check if="{{@STEP === 'last'}}">
+        <!-- Start: Step 5 Installed -->
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Rimtay Installer (Thank you)</h4>
+                        <h6 class="text-muted card-subtitle mb-2">Installation/Update complete</h6>
+                        <p class="card-text">Thank you for installing/updating our Software! Everything went well...&nbsp;<br><br>If this is your first install, we also logged you in to your admin panel. Just click the button and go to your admin panel, do not forget to change
+                            your login details.<br><br>If you have any questions, feel free to contact us.<br><br><strong>The installer is locked with INSTALL_LOCK and UPDATE_LOCK files. If you want to run the installer again please remove them with your Rimtay/conf/rimtay.ini file. Refer to the docs for further info.</strong></p>
+                        <a
+                            class="btn btn-primary" role="button" href="{{@SITE.url}}">Visit Web-Site</a><a class="btn btn-dark" role="button" href="{{@SITE.url}}/admin" style="margin-left: 25px;">Visit Admin Panel</a><a class="btn btn-info text-left" role="button" href="https://cl.rimtay.com/assist" target="_blank"
+                                style="margin-left: 25px;">Read the FAQ</a></div>
+                </div>
+            </div>
+        </div>
+		<!-- End: Step 5 Installed -->
+		</check>
+		<check if="{{@STEP === 'ERR'}}">
+			<!-- Start: Step ERROR -->
+			<div class="row">
+				<div class="col">
+					<div class="card">
+						<div class="card-body">
+							<h4 class="card-title">Rimtay Installer (Not Available)</h4>
+							<h6 class="text-muted card-subtitle mb-2">Installer is not available</h6>
+							<p class="card-text">System blocked the installer to re-run for security purposes.</p>
+							<p>Please try to remove <strong>INSTALL_LOCK</strong> folder from root directory to re-run installer. Thank you.</p>
+							<a class="btn btn-primary" role="button" href="{{@SITE.url}}">Visit Web-Site</a><a class="btn btn-info text-left" role="button"
+								href="https://cl.rimtay.com/assist" target="_blank" style="margin-left: 25px;">Read the FAQ</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End: Step ERROR -->
+		</check>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

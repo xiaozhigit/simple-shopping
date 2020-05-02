@@ -1,0 +1,140 @@
+<check if="{{@DEBUG > 0}}">
+	<div class="alert alert-warning" role="alert">{{@LANG_ADMIN_202 | raw}}</div>
+</check>
+<check if="{{@NOTSECURE}}">
+	<div class="alert alert-danger" role="alert"><strong>Danger</strong> System does NOT have {{@NOTSECURE | raw}} on your root directory. Those files prevent anyone else running Updater and Installer. If they don't exist, anyone can run these and can break your system. Please create those files manually.</div>
+</check>
+<!-- Content Row -->
+{{@availableUpdates | raw}}
+<div class="row">
+    <!-- Category Count -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{@LANG_ADMIN_50}}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{@categoryCount}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Count -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">{{@LANG_ADMIN_51}}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{@productCount}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Order Count -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">{{@LANG_ADMIN_52}}</div>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{@orderCount}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Order Count -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">{{@LANG_ADMIN_53}}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{@pendingOrderCount}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-money-check fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Order Totals -->
+    <div class="col-xl-4 col-md-12 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">{{@LANG_ADMIN_54}}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{@CURRENCY_LEFT}} {{@total}} {{@CURRENCY_RIGHT}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-money-bill-wave fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Tax Totals -->
+    <div class="col-xl-4 col-md-12 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">{{@LANG_ADMIN_55}}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{@CURRENCY_LEFT}} {{@taxes}} {{@CURRENCY_RIGHT}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-search-dollar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Total Income -->
+    <div class="col-xl-4 col-md-12 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">{{@LANG_ADMIN_56}}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{@CURRENCY_LEFT}} {{@income}}
+                            {{@CURRENCY_RIGHT}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-lira-sign fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="mt-1 ml-2">
+        {{@otherPlugins | raw}}
+    </div>
+</div>

@@ -1,0 +1,59 @@
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+@media (max-width: 480px) { 
+  input[type=number] {
+    padding: 2px;
+    font-size: .75rem;
+  }
+}
+
+.rimProductImage {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.rimproducts > .form-control {
+  margin-top: 25px; 
+}
+
+.rimproducts > .subtotal-text {
+  margin: 25px 0px 25px 0px; 
+  height: 30px;
+  display: inline-block;
+  font-weight: 600;
+  float: right;
+}
+
+.rimImageBox {
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+  display: inline-block;
+  text-align: center;
+}
+
+.rim-col-productY{
+  width: 52.50%;
+}
+.rim-col-product{
+  width: 40%;
+}
+
+.rim-col-tax-price {
+  width: 12.50%;
+}
+
+.rim-col-quantity{
+  width: 15%;
+}
+
+.rim-col-total {
+  width: 20%;
+}
