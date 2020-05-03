@@ -1,5 +1,8 @@
 package com.xiaozhi.shopping.model;
 
+import lombok.Data;
+
+@Data
 public class OrdersWithBLOBs extends Orders {
     private String orderSummary;
 

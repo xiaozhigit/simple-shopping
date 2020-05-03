@@ -5,6 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="orderid" jdbcType="INTEGER" property="orderid" />
     <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="productName"  property="productName" />
     <result column="quantity" jdbcType="REAL" property="quantity" />
     <result column="price" jdbcType="REAL" property="price" />
     <result column="tax" jdbcType="REAL" property="tax" />
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, orderid, product_id, quantity, price, tax, sub_total, total_tax, total
+    oi.id, oi.orderid, oi.product_id, oi.quantity, oi.price, oi.tax, oi.sub_total, oi.total_tax, oi.total
   </sql>
   <select id="selectByExample" parameterType="com.xiaozhi.shopping.model.OrderItemsExample" resultMap="BaseResultMap">
     select
@@ -79,7 +80,8 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from order_items
+    ,(select name from products where id=oi.product_id) as productName
+    from order_items oi
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,7 +92,8 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from order_items
+    ,(select name from products where id=oi.product_id) as productName
+    from order_items oi
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -110,6 +113,16 @@
     values (#{id,jdbcType=INTEGER}, #{orderid,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, 
       #{quantity,jdbcType=REAL}, #{price,jdbcType=REAL}, #{tax,jdbcType=REAL}, #{subTotal,jdbcType=REAL}, 
       #{totalTax,jdbcType=REAL}, #{total,jdbcType=REAL})
+  </insert>
+  <insert id="insertPatch" parameterType="java.util.List">
+    insert into order_items (id, orderid, product_id, quantity, price, tax, sub_total, total_tax, total)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.orderid,jdbcType=INTEGER}, #{item.productId,jdbcType=INTEGER},
+      #{item.quantity,jdbcType=REAL}, #{item.price,jdbcType=REAL}, #{item.tax,jdbcType=REAL}, #{item.subTotal,jdbcType=REAL},
+      #{item.totalTax,jdbcType=REAL}, #{item.total,jdbcType=REAL}
+      )
+    </foreach>
   </insert>
   <insert id="insertSelective" parameterType="com.xiaozhi.shopping.model.OrderItems">
     insert into order_items

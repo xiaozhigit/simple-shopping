@@ -15,42 +15,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 主页控制器
+ * 首页控制器
  */
 @Controller
 @RequestMapping(value = "/")
 public class IndexController {
 
-        //商品种类
-        @Autowired
-        CategoriesService categoriesService;
-        //商品类
-        @Autowired
-        ProductsService productsService;
+    //商品种类
+    @Autowired
+    CategoriesService categoriesService;
+    //商品类
+    @Autowired
+    ProductsService productsService;
 
-        @RequestMapping(value = "/")
-        public String index(HttpServletRequest request){
-           // List<Products> products= productsService.findAll();
-          //  List<Categories> categories= categoriesService.findAll();
-            List<CategorieVo>  categorieVos=new ArrayList<>();
-            List<Products> products1=new ArrayList<>();
-            for (Categories categorie:categoriesService.findAll()) {
-                CategorieVo categorieVo=new CategorieVo();
-                categorieVo.setId(categorie.getId());
-                categorieVo.setName(categorie.getName());
-                categorieVo.setActive(categorie.getActive());
-                for (Products product:productsService.findAll()) {
-                    if(product.getCategory().equals(categorie.getId())){
-                        products1.add(product);
-                    }
+    @RequestMapping(value = "/index")
+    public String index(HttpServletRequest request) {
+        List<CategorieVo> categorieVos = new ArrayList<>();
+        for (Categories categorie : categoriesService.findAll()) {
+
+            List<Products> products1 = new ArrayList<>();
+            CategorieVo categorieVo = new CategorieVo();
+
+            categorieVo.setId(categorie.getId());
+            categorieVo.setName(categorie.getName());
+            categorieVo.setActive(categorie.getActive());
+
+            for (Products product : productsService.findAll()) {
+                if (product.getCategory().equals(categorie.getId())) {
+                    products1.add(product);
                 }
-                categorieVo.setProducts(products1);
-                categorieVos.add(categorieVo);
-
             }
-            request.setAttribute("categories",categorieVos);
-            return "order";
+            categorieVo.setProducts(products1);
+            categorieVos.add(categorieVo);
         }
+        request.setAttribute("categories", categorieVos);
+        return "order";
+    }
 
 
 }

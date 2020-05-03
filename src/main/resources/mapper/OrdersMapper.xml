@@ -132,13 +132,13 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.xiaozhi.shopping.model.OrdersWithBLOBs">
-    insert into orders (id, name, ip, 
+  <insert id="insert" parameterType="com.xiaozhi.shopping.model.OrdersWithBLOBs" useGeneratedKeys="true" keyProperty="id">
+    insert into orders (name, ip,
       email, company, phone, 
       shipping_option, order_notes, order_status, 
       total, taxes, create_time, 
       order_summary, custom_fields)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+    values (#{name,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR},
       #{email,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{shippingOption,jdbcType=VARCHAR}, #{orderNotes,jdbcType=VARCHAR}, #{orderStatus,jdbcType=CHAR}, 
       #{total,jdbcType=REAL}, #{taxes,jdbcType=REAL}, #{createTime,jdbcType=TIMESTAMP}, 
