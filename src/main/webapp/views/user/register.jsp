@@ -85,7 +85,7 @@
 
 </div>
 
-<script src="../static/layui/layui.js"></script>
+<script src="../../../resources/static/layui/layui.js"></script>
 <script>
     layui.use(['form', 'jquery'], function(){
         $ = layui.jquery

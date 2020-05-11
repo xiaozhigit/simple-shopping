@@ -6,15 +6,20 @@ import com.xiaozhi.shopping.model.vo.OrdersVo;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 public interface OrdersService {
     int save(HttpServletRequest request,OrdersVo ordersVo);
 
     void deleteById(Integer id);
 
-    void update(Orders orders);
+    void update(OrdersWithBLOBs orders);
 
     OrdersVo findById(Integer id);
 
     List<Orders> findAll();
+
+    Map getPayAndPendingOrderCount();
+
+    Map getOrderPayInfo();
 }

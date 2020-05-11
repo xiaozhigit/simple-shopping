@@ -16,4 +16,24 @@ public class ProductsServiceImpl implements ProductsService {
     public List<Products> findAll() {
         return productsMapper.selectByExample(null);
     }
+
+    @Override
+    public void save(Products products) {
+        productsMapper.insertSelective(products);
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        productsMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void update(Products products) {
+        productsMapper.updateByPrimaryKeySelective(products);
+    }
+
+    @Override
+    public Products findById(int id) {
+        return productsMapper.selectByPrimaryKey(id);
+    }
 }

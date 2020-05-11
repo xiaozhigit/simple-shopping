@@ -17,10 +17,12 @@ public class Orders {
 
     private String phone;
 
+    private String address;
+
     private String shippingOption;
 
     private String orderNotes;
-    //订单状态：0已提交，1已付款.2已发货，3已签收，4已完成
+    //订单状态：-1:取消订单，0已提交，1已付款.2已发货，3已签收，4已完成
     private String orderStatus;
 
     private Float total;

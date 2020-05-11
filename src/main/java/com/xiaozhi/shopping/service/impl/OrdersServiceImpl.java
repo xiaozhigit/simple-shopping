@@ -1,5 +1,6 @@
 package com.xiaozhi.shopping.service.impl;
 
+import com.xiaozhi.shopping.base.util.BigDecimalUtil;
 import com.xiaozhi.shopping.base.util.Utils;
 import com.xiaozhi.shopping.dao.OrderItemsMapper;
 import com.xiaozhi.shopping.dao.OrdersMapper;
@@ -10,11 +11,9 @@ import com.xiaozhi.shopping.model.OrdersWithBLOBs;
 import com.xiaozhi.shopping.model.vo.OrdersVo;
 import com.xiaozhi.shopping.service.OrdersService;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class OrdersServiceImpl implements OrdersService {
@@ -42,12 +41,17 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     public void deleteById(Integer id) {
-
+        //删除订单及订单项
+        ordersMapper.deleteByPrimaryKey(id);
+        OrderItemsExample itemsExample=new OrderItemsExample();
+        OrderItemsExample.Criteria criteria=itemsExample.createCriteria();
+        criteria.andOrderidEqualTo(id);
+        orderItemsMapper.selectByExample(itemsExample);
     }
 
     @Override
-    public void update(Orders orders) {
-
+    public void update(OrdersWithBLOBs orders) {
+        ordersMapper.updateByPrimaryKeySelective(orders);
     }
 
     @Override
@@ -75,7 +79,53 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     public List<Orders> findAll() {
-        return null;
+        return ordersMapper.selectByExample(null);
+    }
+
+    /**
+     * 获取付款的和未付款的订单数量
+     * @return
+     */
+    public Map getPayAndPendingOrderCount() {
+        Map map=new HashMap();
+        List<Orders> orders=this.findAll();
+        int payOrderCount=0,pendIngOrderCount=0;
+        for (Orders order:orders) {
+            if(order.getOrderStatus().equals("0")){
+                pendIngOrderCount++;
+            }else if(order.getOrderStatus().equals("1")){
+                payOrderCount++;
+            }
+        }
+        map.put("payment",payOrderCount);
+        map.put("pending",pendIngOrderCount);
+        return map;
+    }
+
+    /**
+     * 获取已支付订单信息（合计，总税收，总收入）
+     * @return
+     */
+    public Map getOrderPayInfo() {
+        Map map=new HashMap();
+        List<Orders> orders=this.findAll();
+        List<Orders> payOrders=new ArrayList<>();
+        double totalTaxes=0,total=0;
+        for (Orders order:orders) {
+            if(order.getOrderStatus().equals("1")){
+                payOrders.add(order);
+            }
+        }
+        if(payOrders.size()>0){
+            for (Orders order:payOrders) {
+                totalTaxes=BigDecimalUtil.add(totalTaxes,order.getTaxes());
+                total=BigDecimalUtil.add(total,order.getTotal());
+            }
+        }
+        map.put("EARNING",BigDecimalUtil.add(total,totalTaxes));
+        map.put("TAXES",totalTaxes);
+        map.put("INCOME",total);
+        return map;
     }
 
     /**

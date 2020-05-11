@@ -2,7 +2,6 @@ package com.xiaozhi.shopping.service;
 
 
 import com.xiaozhi.shopping.model.Categories;
-
 import java.util.List;
 
 /**
@@ -11,4 +10,12 @@ import java.util.List;
 public interface CategoriesService  {
 
     List<Categories> findAll();
+
+    void save(Categories categories);
+
+    void deleteById(Integer id);
+
+    void update(Categories categories);
+
+    Categories findById(Integer id);
 }

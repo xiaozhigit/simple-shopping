@@ -24,4 +24,24 @@ public class CategoriesServiceImpl  implements CategoriesService {
     public List<Categories> findAll() {
         return categoriesMapper.selectByExample(null);
     }
+
+    @Override
+    public void save(Categories categories) {
+        categoriesMapper.insertSelective(categories);
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        categoriesMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void update(Categories categories) {
+        categoriesMapper.updateByPrimaryKeySelective(categories);
+    }
+
+    @Override
+    public Categories findById(Integer id) {
+        return categoriesMapper.selectByPrimaryKey(id);
+    }
 }

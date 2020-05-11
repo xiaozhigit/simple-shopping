@@ -145,9 +145,9 @@
 				<!-- Start: Payment Card -->
 				<div class="card mt-3">
 					<div class="card-body">
-						<h4 class="card-title">{{@LANG_50| raw}}</h4>
-						<h6 class="text-muted card-subtitle mb-2">{{@LANG_51| raw}}</h6>
-						<p class="card-text">{{@LANG_52| raw}}</p>
+						<h4 class="card-title">Pay Now</h4>
+						<h6 class="text-muted card-subtitle mb-2">You can pay your order using our form.</h6>
+						<p class="card-text">Our payment form uses Stripe. We do not see any of your CC information. All payments are processed by Stripe.</p>
 						<form action="/charge" method="post" id="payment-form">
 							<input type="hidden" name="orderId" value="{{@ORDER.id}}">
 							<input type="hidden" name="orderHash" value="{{@ORDER.hash}}">

@@ -35,7 +35,7 @@
                         <input type="number" name="price-${product.id}" readonly="readonly" value="${product.price}" class="quantity form-control form-control-sm text-center">
                     </td>
                     <td class="rimproducts">
-                        <input type="button"  class="add-on" οnclick="alert();" ><i class="icon-minus"></i></input>
+                        <input type="button"  class="add-on" οnclick="chgNum(this,'del');" ><i class="icon-minus"></i></input>
 
                         <input class="text-center" style="width: 30px" id="appendedPrependedInput" disabled="disabled" type="text" value="0">
 
@@ -58,9 +58,7 @@
             </tr>
         </tbody>
     <script type="text/javascript">
-        $(".add-on").on("click",function () {
-            console.log("deldeldel")
-        })
+
 
         /** 加减商品数量**/
         function chgNum(obj, opr){

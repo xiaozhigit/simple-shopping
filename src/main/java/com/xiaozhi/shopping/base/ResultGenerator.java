@@ -24,4 +24,10 @@ public class ResultGenerator {
                 .setCode(ResultCode.FAIL)
                 .setMessage(message);
     }
+    public static <T> Result<T> genSuccess(T data) {
+        return new Result()
+                .setCode(ResultCode.SUCCESS2)
+                .setMsg(DEFAULT_SUCCESS_MESSAGE)
+                .setData(data);
+    }
 }

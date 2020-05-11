@@ -8,6 +8,17 @@ import com.alibaba.fastjson.JSON;
 public class Result<T> {
     private int code;
     private String message;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public Result setMsg(String msg) {
+        this.msg = msg;
+        return this;
+    }
+
+    private String msg;
     private T data;
 
     public Result setCode(ResultCode resultCode) {
