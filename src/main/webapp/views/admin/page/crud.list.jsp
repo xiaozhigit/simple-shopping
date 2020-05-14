@@ -14,7 +14,6 @@
     <meta name="description" content="Multi Product Order Form :: Rimtay Software">
     <meta name="author" content="Rimtay Software">
     <title>Multi Product Order Form :: Rimtay Software</title>
-    <!-- Custom fonts for this template-->
     <link href="<%=path%>/static/bootstrap/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="<%=path%>/static/bootstrap/alertify/alertify.min.css" rel="stylesheet" type="text/css">
     <link href="<%=path%>/static/bootstrap/alertify/themes/default.min.css" rel="stylesheet" type="text/css">
@@ -69,9 +68,14 @@
                                         <td> <c:out value="${DATA}"/></td>
                                     </c:forEach>
                                     <td>
-                                        <a href="<%=path%>/${TABLE_NAME}/edit?id=<c:out value="${RECORD.id}"/>" title="edit" target="_self">
+                                        <a href="<%=path%>/${TABLE_NAME}/edit?id=${RECORD.id}" title="edit" target="_self">
                                             <i class="fas fa-edit fa-fw"></i></a>
                                         </a>
+                                        <c:if test="${TABLE_NAME=='orders'}">
+                                            <a href="<%=path%>/${TABLE_NAME}/view_orderItem?id=${RECORD.id}" title="edit" target="_self">
+                                                查看订单项
+                                            </a>
+                                        </c:if>
                                         <a  onclick="removeConfirm(${RECORD.id});"  title="delete">
                                             <i class="fas fa-trash-alt fa-fw"></i></a>
                                         </a>

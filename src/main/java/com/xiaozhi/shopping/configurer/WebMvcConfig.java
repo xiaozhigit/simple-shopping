@@ -36,8 +36,8 @@ import java.util.List;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer   {
     //文件上传路径
-    @Value("${fileUploadPath}")
-    private String fileUploadPath;
+    @Value("${fileBasePath}")
+    private String fileBasePath;
 
 
     private final Logger logger = LoggerFactory.getLogger(WebMvcConfigurer.class);
@@ -62,7 +62,7 @@ public class WebMvcConfig implements WebMvcConfigurer   {
 
         //配置文件映射路径
         registry.addResourceHandler("/static/**")
-                .addResourceLocations("classpath:/static/","file:"+fileUploadPath);
+                .addResourceLocations("classpath:/static/","file:"+fileBasePath);
         WebMvcConfigurer.super.addResourceHandlers(registry);
     }
 

@@ -18,10 +18,10 @@
     <link href="<%=path%>/static/bootstrap/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="<%=path%>/static/bootstrap/alertify/alertify.min.css" rel="stylesheet" type="text/css">
     <link href="<%=path%>/static/bootstrap/alertify/themes/default.min.css" rel="stylesheet" type="text/css">
+    <link href="<%=path%>/static/layui/css/layui.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template-->
     <link href="<%=path%>/static/bootstrap/admin/css/sb-admin-2.css" rel="stylesheet">
-    <script type="text/javascript" src="<%=path%>/static/js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="<%=path%>/static/bootstrap/alertify.min.js"></script>
+
 </head>
 <body>
 <div class="row">
@@ -46,7 +46,7 @@
                         </div>
                         <div class="form-group">
                         <label><strong>Order Total</strong></label>
-                        <input type="number" name="total" value="${order.total}" class="form-control">
+                        <input type="number" name="total"  value="${order.total}" class="form-control">
                         </div>
                         <div class="form-group">
                         <label><strong>Order Taxes</strong></label>
@@ -78,34 +78,50 @@
                         </div>
                     </c:if>
                     <c:if test="${product!=null}">
-                        <input type="text" type="hidden" name="id" value="${product.id}">
+                        <div class="form-group">
+                        <input  type="hidden" name="id" value="${product.id}">
                         <label><strong>Category</strong></label>
                         <select class="form-control"   name="category" id="category">
                             <c:forEach items="${categories}" var="category">
                                 <option ${product.category==category.id?"selected":''}  value="${category.id}">${category.name}</option>
                             </c:forEach>
                         </select>
+                        </div>
+                        <div class="form-group">
                         <label><strong>Product Name</strong></label>
-                        <input type="text" name="name" value="${product.name}">
+                        <input type="text" name="name" class="form-control" value="${product.name}">
+                        </div>
+                        <div class="form-group">
                         <label><strong>Producer</strong></label>
-                        <input type="text" name="producer" value="${product.producer}">
+                        <input type="text" name="producer" class="form-control" value="${product.producer}">
+                        </div>
+                        <div class="form-group">
                         <label><strong>Product Image</strong></label>
-                        <input type="text" name="image" value="${product.image}">
+                            <img src="<%=path%>/${product.image}" style="width:60px;height:60px" id="product_image" >
+                            <input type="hidden" name="image"  value="${product.image}" >
+                            <button type="button" class="layui-btn" id="test1">上传图片</button>
+                        </div>
+                        <div class="form-group">
                         <label><strong>Product Price</strong></label>
-                        <input type="number" name="price" value="${product.price}">
+                        <input type="number" name="price" class="form-control" value="${product.price}">
+                        </div>
+                        <div class="form-group">
                         <label><strong>Product Tax</strong></label>
-                        <input type="number" name="tax" value="${product.tax}">
+                        <input type="number" name="tax" class="form-control" value="${product.tax}">
+                        </div>
+                        <div class="form-group">
                         <label><strong>Product Status</strong></label>
-                        <select class="form-control"   name="active" id="active">
+                        <select class="form-control"   name="active" >
                                 <option ${product.active=="Y"?"selected":''}  value="Y">Active</option>
                                 <option ${product.active=="N"?"selected":''}  value="N">Passive</option>
                         </select>
+                        </div>
                     </c:if>
                     <c:if test="${category!=null}">
                         <div class="form-group">
                         <input  type="hidden" name="id" value="${category.id}"/>
                         <label><strong>Category Name</strong></label>
-                        <input type="text" name="name" value="${category.name}"/>
+                        <input type="text" name="name" class="form-control" value="${category.name}"/>
                         </div>
                         <div class="form-group">
                         <label><strong>Category Status</strong></label>
@@ -122,7 +138,30 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="<%=path%>/static/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="<%=path%>/static/bootstrap/alertify.min.js"></script>
 <script>
+    layui.use('upload', function(){
+        var $ = layui.jquery
+        ,upload = layui.upload;
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#test1'
+            ,url: '<%=path%>/admin/upload'
+            ,accept:'images'
+            ,done: function(res){
+                //如果上传失败
+                if(res.code ==200){
+                    $("input[name='image']").val(res.data);
+                    $("#product_image").attr("src", "<%=path%>/"+res.data);
+                }
+            }
+            ,error: function(e){
+                alert(e)
+            }
+        });
+    });
+
     function updateData() {
         $.ajax({
             url:"<%=path%>/${TABLE_NAME}/update",

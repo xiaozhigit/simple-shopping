@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xiaozhi.shopping.base.Result;
 import com.xiaozhi.shopping.base.ResultGenerator;
+import com.xiaozhi.shopping.model.OrderItems;
 import com.xiaozhi.shopping.model.Orders;
 import com.xiaozhi.shopping.model.OrdersWithBLOBs;
 import com.xiaozhi.shopping.model.vo.OrdersVo;
@@ -31,6 +32,7 @@ public class OrdersController {
     @Resource
     private OrdersService ordersService;
 
+
     @ResponseBody
     @RequestMapping("/add")
     public Result add(HttpServletRequest request, @RequestBody OrdersVo ordersVo) {
@@ -45,11 +47,53 @@ public class OrdersController {
         return ResultGenerator.genSuccessResult();
     }
 
+    /**
+     * 删除订单项
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/deleteOrderItem")
+    public Result deleteOrderItem(@RequestParam Integer id) {
+        ordersService.deleteOrderItemById(id);
+        return ResultGenerator.genSuccessResult();
+    }
+
     @RequestMapping("/edit")
     public String edit(HttpServletRequest request,int id) {
         OrdersVo ordersVo = ordersService.findById(id);
+        request.setAttribute("title","Orders - Edit Record #"+id);
         request.setAttribute("TABLE_NAME","orders");
         request.setAttribute("order",ordersVo);
+        return "admin/page/crud.edit";
+    }
+    /**
+     * 查看订单项
+     * @param request
+     * @param id 订单id
+     * @return
+     */
+    @RequestMapping("/view_orderItem")
+    public String view_orderItem(HttpServletRequest request,int id) {
+        OrdersVo ordersVo = ordersService.findById(id);
+        request.setAttribute("title","Orders-item - view Record #"+id);
+        request.setAttribute("TABLE_NAME","orders");
+        request.setAttribute("order",ordersVo);
+        return "admin/page/view_order_item";
+    }
+
+    /**
+     * 编辑订单项
+     * @param request
+     * @param id 订单项id
+     * @return
+     */
+    @RequestMapping("/edit_order_item")
+    public String edit_order_item(HttpServletRequest request,int id) {
+        OrderItems orderItem = ordersService.findOrderItemById(id);
+        request.setAttribute("title","Orders-item - Edit Record #"+id);
+        request.setAttribute("TABLE_NAME","orders");
+        request.setAttribute("orderItem",orderItem);
         return "admin/page/crud.edit";
     }
 
@@ -66,6 +110,7 @@ public class OrdersController {
         request.setAttribute("orders",ordersVo);
         return "payment";
     }
+
 
     @RequestMapping("/list")
     public String list(HttpServletRequest request,@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) {
@@ -100,6 +145,5 @@ public class OrdersController {
         request.setAttribute("RECORDS",RECORDS);
         request.setAttribute("pageInfo",pageInfo);
         return "admin/page/crud.list";
-       // return ResultGenerator.genSuccessResult(pageInfo);
     }
 }

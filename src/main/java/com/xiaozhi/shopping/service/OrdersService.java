@@ -1,5 +1,6 @@
 package com.xiaozhi.shopping.service;
 
+import com.xiaozhi.shopping.model.OrderItems;
 import com.xiaozhi.shopping.model.Orders;
 import com.xiaozhi.shopping.model.OrdersWithBLOBs;
 import com.xiaozhi.shopping.model.vo.OrdersVo;
@@ -22,4 +23,8 @@ public interface OrdersService {
     Map getPayAndPendingOrderCount();
 
     Map getOrderPayInfo();
+
+    OrderItems findOrderItemById(int id);
+
+    void deleteOrderItemById(Integer id);
 }

@@ -34,11 +34,10 @@ public class ProductsController {
     @Resource
     private CategoriesService categoriesService;
 
-    @ResponseBody
     @RequestMapping("/add")
-    public Result add(HttpServletRequest request,Products products) {
+    public String add(HttpServletRequest request,Products products) {
         productsService.save(products);
-        return  ResultGenerator.genSuccessResult();
+        return "redirect:/product/list";
     }
 
     @ResponseBody
@@ -52,6 +51,8 @@ public class ProductsController {
     public String edit(HttpServletRequest request,int id) {
         Products products = productsService.findById(id);
         List<Categories> categories=categoriesService.findAll();
+        request.setAttribute("TABLE_NAME","product");
+        request.setAttribute("title","Products - Edit Record #"+id);
         request.setAttribute("categories",categories);
         request.setAttribute("product",products);
         return "admin/page/crud.edit";

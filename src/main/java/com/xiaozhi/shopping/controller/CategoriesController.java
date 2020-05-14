@@ -50,6 +50,7 @@ public class CategoriesController {
     @RequestMapping("/edit")
     public String edit(HttpServletRequest request, int id) {
         Categories categories = categoriesService.findById(id);
+        request.setAttribute("title","Categories - Edit Record #"+id);
         request.setAttribute("TABLE_NAME","categories");
         request.setAttribute("category",categories);
         return "admin/page/crud.edit";

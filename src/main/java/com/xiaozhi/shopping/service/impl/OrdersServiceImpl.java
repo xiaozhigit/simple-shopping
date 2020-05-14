@@ -129,6 +129,25 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     /**
+     * 通过订单项id查询订单
+     * @param id
+     * @return
+     */
+    @Override
+    public OrderItems findOrderItemById(int id) {
+        return orderItemsMapper.selectByPrimaryKey(id);
+    }
+
+    /**
+     * 通过订单项id删除订单项
+     * @param id
+     */
+    @Override
+    public void deleteOrderItemById(Integer id) {
+        orderItemsMapper.deleteByPrimaryKey(id);
+    }
+
+    /**
      * 订单信息由vo转pojo
      * @param order
      * @param ordersVo
