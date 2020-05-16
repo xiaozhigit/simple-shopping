@@ -65,15 +65,9 @@ public class ProductsController {
         return ResultGenerator.genSuccessResult();
     }
 
-//    @RequestMapping("/detail")
-//    public String detail(HttpServletRequest request,@RequestParam Integer id) {
-//        Products products = productsService.findById(id);
-//        request.setAttribute("product",products);
-//        return  "admin/page/crud.edit";
-//    }
 
     @RequestMapping("/list")
-    public String list(HttpServletRequest request,@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+    public String list(HttpServletRequest request,@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "6") Integer size) {
         request.setAttribute("TABLE_NAME","product");
         //封装表列名
         List<String> COLUMNS=new ArrayList<>();

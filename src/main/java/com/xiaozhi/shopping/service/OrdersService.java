@@ -27,4 +27,6 @@ public interface OrdersService {
     OrderItems findOrderItemById(int id);
 
     void deleteOrderItemById(Integer id);
+
+    void updateOrderItem(OrderItems rderItems);
 }

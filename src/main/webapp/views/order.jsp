@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="<%=path%>/static/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="<%=path%>/static/bootstrap/lightbox.min.css">
     <link rel="stylesheet" href="<%=path%>/static/bootstrap/style.css?v=44">
-
+    <link rel="stylesheet" href="<%=path%>/static/css/iconfont.css?v=44">
 
     <link rel="apple-touch-icon" sizes="57x57" href="<%=path%>/static/bootstrapfavicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="<%=path%>/static/bootstrap/favicon/apple-icon-60x60.png">
@@ -81,11 +81,9 @@
                                                 <input type="number" name="price-${product.id}"  id="price-${product.id}" readonly="readonly" value="${product.price}" class="quantity form-control form-control-sm text-center">
                                             </td>
                                             <td class="rimproducts">
-                                                <input type="button"  class="add-on" onclick="chgNum(this,'del',${product.id})" ><i class="icon-minus"></i></input>
-
-                                                <input class="text-center product-number" style="width: 30px" id="number-${product.id}" disabled="disabled" type="text" value="0">
-
-                                                <input type="button" class="add-on" onclick="chgNum(this,'add',${product.id})"><i class="icon-plus"></i></input>
+                                                <span class="iconfont icon-iconless"  onclick="chgNum(this,'del',${product.id})" style="visibility: hidden;" ></span>
+                                                <input class="text-center product-number" style="width: 30px"  name="quantity-${product.id}" disabled="disabled" type="text" value="0">
+                                                <span class="iconfont icon-add" onclick="chgNum(this,'add',${product.id})"></span>
                                             </td>
                                             <td class="rimproducts">
                                                 <input type="number" name="total-${product.id}"  id="total-${product.id}" readonly="readonly" value="0.00" class="rimtotal form-control form-control-sm text-center item-total">
@@ -156,8 +154,13 @@
  <script type="text/javascript" src="<%=path%>/static/bootstrap/ea_order.js"></script>
     <script src="<%=path%>/static/bootstrap/jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
+        var yEdition=false;
         //提交订单
        function submitData(){
+          if($("input[name=subtotal]").val()<80){
+              alert("订单总金额小于80,不能提交订单");
+              return
+          }
            debugger;
            let goods=[];
            $(".product-number").each(function () {
@@ -206,39 +209,72 @@
            return false;
         }
 
-
         /** 加减商品数量**/
         function chgNum(obj, opr,id){
-           // debugger
+            //debugger
             let numberObj=$(obj).parent().find(".text-center");
             let cureentNumber= parseInt($(numberObj).val());
             //console.log(cureentNumber);
 
-             let price = $("#price-"+id).val();
             if(opr=='del'){
                 if(cureentNumber == 0){
                     alert("不能减了！");
                     return ;
                 }
-                 $(numberObj).val(cureentNumber - 1);
+                $(numberObj).val(cureentNumber - 1);
                 cureentNumber = cureentNumber - 1;
+                getPrice(id);
             }else if(opr=='add'){
                 if(cureentNumber == 99){
                     alert('不能加了！');
                     return ;
                 }
-                 $(numberObj).val(cureentNumber + 1);
+                $(numberObj).val(cureentNumber + 1);
                 cureentNumber = cureentNumber + 1;
+                getPrice(id);
             }
-                let itemTotal=cureentNumber*price;
-             $("#total-"+id).val(itemTotal.toFixed(2));
-            //item-total
-            let totalPrice=0.00;
-            $(".item-total").each(function () {
-                totalPrice+=parseFloat($(this).val());
-            });
-            $("#totalPrice").val(totalPrice.toFixed(2));
+            if(cureentNumber>0){
+                $(obj).parent().find(".icon-iconless").css('visibility','visible');
+                $(obj).parent().parent().addClass("tr_back_color")
+            }else{
+                $(obj).parent().find(".icon-iconless").css('visibility','hidden');
+                $(obj).parent().parent().removeClass("tr_back_color");
+            }
         }
+
+
+        // /** 加减商品数量**/
+        // function chgNum(obj, opr,id){
+        //    // debugger
+        //     let numberObj=$(obj).parent().find(".text-center");
+        //     let cureentNumber= parseInt($(numberObj).val());
+        //     //console.log(cureentNumber);
+        //
+        //      let price = $("#price-"+id).val();
+        //     if(opr=='del'){
+        //         if(cureentNumber == 0){
+        //             alert("不能减了！");
+        //             return ;
+        //         }
+        //          $(numberObj).val(cureentNumber - 1);
+        //         cureentNumber = cureentNumber - 1;
+        //     }else if(opr=='add'){
+        //         if(cureentNumber == 99){
+        //             alert('不能加了！');
+        //             return ;
+        //         }
+        //          $(numberObj).val(cureentNumber + 1);
+        //         cureentNumber = cureentNumber + 1;
+        //     }
+        //         let itemTotal=cureentNumber*price;
+        //      $("#total-"+id).val(itemTotal.toFixed(2));
+        //     //item-total
+        //     let totalPrice=0.00;
+        //     $(".item-total").each(function () {
+        //         totalPrice+=parseFloat($(this).val());
+        //     });
+        //     $("#totalPrice").val(totalPrice.toFixed(2));
+        // }
         //校验表单信息
         function validateFrom() {
             if($("#name").val()==""){
@@ -258,10 +294,8 @@
             }
         }
     </script>
-
     <script src="<%=path%>/static/bootstrap/lightbox.min.js"></script>
     <script src="<%=path%>/static/bootstrap/bootstrap.min.js"></script>
 
 </body>
-
 </html>

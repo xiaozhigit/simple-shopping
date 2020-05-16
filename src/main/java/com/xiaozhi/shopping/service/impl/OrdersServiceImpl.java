@@ -146,6 +146,14 @@ public class OrdersServiceImpl implements OrdersService {
     public void deleteOrderItemById(Integer id) {
         orderItemsMapper.deleteByPrimaryKey(id);
     }
+    /**
+     * 通过订单项id更新订单项
+     * @param rderItems
+     */
+    @Override
+    public void updateOrderItem(OrderItems rderItems) {
+        orderItemsMapper.updateByPrimaryKeySelective(rderItems);
+    }
 
     /**
      * 订单信息由vo转pojo

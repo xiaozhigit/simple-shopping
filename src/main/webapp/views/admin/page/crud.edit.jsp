@@ -131,6 +131,41 @@
                         </select>
                          </div>
                     </c:if>
+                    <c:if test="${orderItem!=null}">
+                        <div class="form-group">
+                            <input  type="hidden" name="id" value="${orderItem.id}"/>
+                            <label><strong>OrderId</strong></label>
+                            <input type="text" readonly="readonly" class="form-control" value="${orderItem.orderid}"/>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>ProductName</strong></label>
+                            <input type="text" readonly="readonly" class="form-control" value="${orderItem.productName}"/>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Price</strong></label>
+                            <input type="text" readonly="readonly" name="price" class="form-control" value="${orderItem.price}"/>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Quantity</strong></label>
+                            <input type="text" name="quantity" class="form-control" onchange="changeQuantity(this)" value="${orderItem.quantity}"/>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Tax</strong></label>
+                            <input type="text" name="tax" class="form-control" value="${orderItem.tax}"/>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>SubTotal</strong></label>
+                            <input type="text" name="subTotal" class="form-control" value="${orderItem.subTotal}"/>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>TotalTax</strong></label>
+                            <input type="text" name="totalTax" class="form-control" value="${orderItem.totalTax}"/>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Total</strong></label>
+                            <input type="text" name="total" class="form-control" value="${orderItem.total}"/>
+                        </div>
+                    </c:if>
 
                     <button class="btn btn-success btn-block" onclick="updateData()">Edit Record</button>
                 </form>
@@ -140,6 +175,8 @@
 </div>
 <script type="text/javascript" src="<%=path%>/static/js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="<%=path%>/static/bootstrap/alertify.min.js"></script>
+<script type="text/javascript" src="<%=path%>/static/layui/layui.js"></script>
+<script type="text/javascript" src="<%=path%>/static/bootstrap/ea_order.js"></script>
 <script>
     layui.use('upload', function(){
         var $ = layui.jquery
@@ -163,8 +200,14 @@
     });
 
     function updateData() {
+        let url="<%=path%>/${TABLE_NAME}/update";
+
+        if(${orderItem!=null}){
+            url="<%=path%>/${TABLE_NAME}/updateOrderItem";
+        }
+
         $.ajax({
-            url:"<%=path%>/${TABLE_NAME}/update",
+            url:url,
             type:"post",
             data:new FormData(document.getElementById("form")),
             processData:false,
@@ -172,13 +215,25 @@
             success:function(data){
                 if(data.code==200){
                     alertify.success("succeeded");
-                    window.location.href="<%=path%>/${TABLE_NAME}/list";
+
+                    if(${orderItem!=null}){
+                        window.location.href="<%=path%>/${TABLE_NAME}/view_orderItem?id=${orderItem.orderid}";
+                    }else{
+                        window.location.href="<%=path%>/${TABLE_NAME}/list";
+                    }
                 }
             },
             error:function(e){
-
+                alertify.error(e);
             }
         });
+    }
+    //订单项数量改变同步变订单项总金额
+    function changeQuantity(obj) {
+        debugger
+        let quantity=$(obj).val();
+       let price=$("input[name=price]").val();
+        $("input[name=subTotal]").val(floatMul(quantity,price));
     }
 </script>
 </body>

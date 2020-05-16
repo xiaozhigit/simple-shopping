@@ -88,20 +88,24 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing ${pageInfo.pageSize} to ${pageInfo.total} of ${pageInfo.pages} entries</div>
+                        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing ${pageInfo.startRow} to ${pageInfo.endRow} of ${pageInfo.pages} entries</div>
                     </div>
                     <div class="col-sm-12 col-md-7">
                     <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
                         <ul class="pagination">
-                            <li class="paginate_button page-item previous disabled" id="dataTable_previous">
-                                <a href="<%=path%>/${TABLE_NAME}/list?page=${pageInfo.pageNum-1}&size=10" target="_self" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                            </li>
+                            <a href="<%=path%>/${TABLE_NAME}/list?page=${pageInfo.pageNum-1}&size=10" target="_self" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">
+                                <li class="paginate_button page-item previous disabled" id="dataTable_previous">
+                                Previous
+                                </li>
+                            </a>
                             <li class="paginate_button page-item active">
                                 <a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">${pageInfo.pageNum}</a>
                             </li>
-                            <li class="paginate_button page-item next disabled" id="dataTable_next">
-                                <a href="<%=path%>/${TABLE_NAME}/list?page=${pageInfo.pageNum+1}&size=10" target="_self" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">Next</a>
-                            </li>
+                            <a href="<%=path%>/${TABLE_NAME}/list?page=${pageInfo.pageNum+1}&size=10" target="_self" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">
+                                <li class="paginate_button page-item next disabled" id="dataTable_next">
+                                Next
+                                </li>
+                            </a>
                         </ul>
                     </div>
                     </div>

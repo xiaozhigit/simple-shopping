@@ -104,6 +104,18 @@ public class OrdersController {
         return ResultGenerator.genSuccessResult();
     }
 
+    /**
+     * 更新订单项信息
+     * @param rderItems
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/updateOrderItem")
+    public Result updateOrderItem(OrderItems rderItems) {
+        ordersService.updateOrderItem(rderItems);
+        return ResultGenerator.genSuccessResult();
+    }
+
     @RequestMapping("/detail")
     public String detail(HttpServletRequest request,@RequestParam Integer id) {
         OrdersVo ordersVo = ordersService.findById(id);
