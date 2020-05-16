@@ -44,6 +44,21 @@
 </head>
 
 <body>
+<!-- Header -->
+<%--<div id="header-wrapper">--%>
+<%--    <header id="header" class="container">--%>
+<%--        <!-- 导航菜单-->--%>
+<%--        <nav id="nav">--%>
+<%--            <ul>--%>
+<%--                <li class="current"><a href="/">Home</a></li>--%>
+<%--                <c:forEach var="categorie" items="${categories}"  varStatus="s">--%>
+<%--                    <li><a href="#${categorie.name}">${categorie.name}</a></li>--%>
+<%--                </c:forEach>--%>
+<%--            </ul>--%>
+
+<%--        </nav>--%>
+<%--    </header>--%>
+<%--</div>--%>
     <form  method="post" οnsubmit="return false;">
         <div class="container-fluid mt-5">
             <div class="row justify-content-center">
@@ -82,7 +97,7 @@
                                             </td>
                                             <td class="rimproducts">
                                                 <span class="iconfont icon-iconless"  onclick="chgNum(this,'del',${product.id})" style="visibility: hidden;" ></span>
-                                                <input class="text-center product-number" style="width: 30px"  name="quantity-${product.id}" disabled="disabled" type="text" value="0">
+                                                <input class="text-center product-number" style="width: 30px" id="number-${product.id}" name="quantity-${product.id}" disabled="disabled" type="text" value="0">
                                                 <span class="iconfont icon-add" onclick="chgNum(this,'add',${product.id})"></span>
                                             </td>
                                             <td class="rimproducts">
