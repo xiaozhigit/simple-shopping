@@ -141,7 +141,27 @@
                             
                             <div class="form-group">
                                 <label for="dealer-phone">Phone</label>
-                                <input type="tel" class="form-control" value=""  name="dealer-phone" id="dealer-phone" placeholder="Please Enter Your Phone Number">
+                                <input type="tel" class="form-control" value=""  name="dealer-phone" id="dealer-phone" placeholder="Please Enter Your Phone Number Or wechatNumber">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dealer-phone">邮政编码</label>
+                                <input type="text" class="form-control" value=""  name="zip" id="zip" placeholder="Please Enter Your zip">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dealer-phone">州</label>
+                                <input type="text" class="form-control" value=""  name="state" id="state" placeholder="Please Enter Your state">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dealer-phone">城市</label>
+                                <input type="text" class="form-control" value=""  name="city" id="city" placeholder="Please Enter Your city">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dealer-phone">地址</label>
+                                <input type="text" class="form-control" value=""  name="address" id="address" placeholder="Please Enter Your address">
                             </div>
                             
                             <div class="form-group">
@@ -203,6 +223,7 @@
            //表单信息校验
            validateFrom();
           let data={name:$("#name").val(),email:$("#email").val(),company:$("#Company").val(),phone:$("#dealer-phone").val(),
+              zip:$("#zip").val(),state:$("#state").val(), city:$("#city").val(),address:$("#address").val(),
                shippingOption:$("#shipping-option").val(),orderNotes:$("#notes").val(),
               taxes: totalTaxes,total:$("#totalPrice").val(),orderItems:goods};
 

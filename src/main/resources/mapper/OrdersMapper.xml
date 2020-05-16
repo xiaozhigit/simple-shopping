@@ -78,7 +78,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, ip, email, company, phone, shipping_option, order_notes, order_status, 
+    id, name, ip, email, company, phone,zip,state,city,address, shipping_option, order_notes, order_status,
     total, taxes, create_time
   </sql>
   <sql id="Blob_Column_List">
@@ -144,7 +144,7 @@
       #{total,jdbcType=REAL}, #{taxes,jdbcType=REAL}, #{createTime,jdbcType=TIMESTAMP}, 
       #{orderSummary,jdbcType=LONGVARCHAR}, #{customFields,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.xiaozhi.shopping.model.OrdersWithBLOBs">
+  <insert id="insertSelective" parameterType="com.xiaozhi.shopping.model.OrdersWithBLOBs" useGeneratedKeys="true" keyProperty="id">
     insert into orders
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -164,6 +164,18 @@
       </if>
       <if test="phone != null">
         phone,
+      </if>
+      <if test="zip != null">
+        zip,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="address != null">
+        address,
       </if>
       <if test="shippingOption != null">
         shipping_option,
@@ -208,6 +220,18 @@
       </if>
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null">
+        #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
       </if>
       <if test="shippingOption != null">
         #{shippingOption,jdbcType=VARCHAR},
@@ -346,6 +370,18 @@
       </if>
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null">
+        zip = #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
       </if>
       <if test="shippingOption != null">
         shipping_option = #{shippingOption,jdbcType=VARCHAR},

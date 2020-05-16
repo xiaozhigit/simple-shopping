@@ -121,6 +121,22 @@
                                     <td>Phone</td>
                                     <td>${orders.phone}</td>
 								</tr>
+								<tr>
+									<td>ZIP</td>
+									<td>${orders.zip}</td>
+								</tr>
+								<tr>
+									<td>STATE</td>
+									<td>${orders.state}</td>
+								</tr>
+								<tr>
+									<td>CITY</td>
+									<td>${orders.city}</td>
+								</tr>
+								<tr>
+									<td>ADDRESS</td>
+									<td>${orders.address}</td>
+								</tr>
 <%--								<repeat group="{{@CUSTOM_FIELDS}}" key="{{@CKEY}}" value="{{@CVALUE}}">--%>
 <%--									<tr>--%>
 <%--										<td>{{@CKEY}}</td>--%>
@@ -148,16 +164,19 @@
 						<h4 class="card-title">Pay Now</h4>
 						<h6 class="text-muted card-subtitle mb-2">You can pay your order using our form.</h6>
 						<p class="card-text">Our payment form uses Stripe. We do not see any of your CC information. All payments are processed by Stripe.</p>
-						<form action="/charge" method="post" id="payment-form">
-							<input type="hidden" name="orderId" value="{{@ORDER.id}}">
-							<input type="hidden" name="orderHash" value="{{@ORDER.hash}}">
-							<form id="payment-form">
-								<div id="card-element">
-								</div>
-							
-								<div id="card-errors" role="alert"></div>
-						
-							<button class="mt-3 btn btn-block btn-success btn-sm">Submit Order</button>
+						<form action="https://bestshengdainc.securepayments.cardpointe.com/pay" method="post" id="payment-form">
+							<input type="hidden" name="orderId" value="${orders.id}">
+							<input type="hidden" name="orderHash" value="${orders.id}">
+							<input type="hidden" name="invoice" value="${orders.id}">
+							<input type="hidden" name="customerId" value="${orders.total}">
+							<input type="hidden" name="billCompany" value="${orders.company}">
+							<input type="hidden" name="billFName" value="${orders.name}">
+							<input type="hidden" name="billLName" value="${orders.name}}">
+							<input type="hidden" name="email" value="${orders.email}">
+							<input type="hidden" name="phone" value="${orders.phone}">
+							<input type="hidden" name="total" value="${orders.total}">
+
+							<button class="mt-3 btn btn-block btn-success btn-sm">信用卡支付</button>
 						</form>
 					</div>
 				</div>

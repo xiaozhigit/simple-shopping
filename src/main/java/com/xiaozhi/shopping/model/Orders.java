@@ -16,7 +16,13 @@ public class Orders {
     private String company;
 
     private String phone;
-
+    //邮政编码
+    private String zip;
+    //所在州
+    private String state;
+    //所在城市
+    private String city;
+    //地址
     private String address;
 
     private String shippingOption;

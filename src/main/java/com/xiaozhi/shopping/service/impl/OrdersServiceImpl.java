@@ -28,7 +28,7 @@ public class OrdersServiceImpl implements OrdersService {
         //填充订单对象
         fullPojo(request,order,ordersVo);
         //保存订单对象到数据库并获取订单id
-        ordersMapper.insert(order);
+        ordersMapper.insertSelective(order);
         //订单项设置订单id
         List<OrderItems> orderItems=ordersVo.getOrderItems();
         for (OrderItems orderItem:orderItems) {
@@ -66,6 +66,10 @@ public class OrdersServiceImpl implements OrdersService {
         ordersVo.setEmail(orders.getEmail());
         ordersVo.setCompany(orders.getCompany());
         ordersVo.setPhone(orders.getPhone());
+        ordersVo.setZip(orders.getZip());
+        ordersVo.setState(orders.getState());
+        ordersVo.setCity(orders.getCity());
+        ordersVo.setAddress(orders.getAddress());
         ordersVo.setTaxes(orders.getTaxes());
         ordersVo.setTotal(orders.getTotal());
 
@@ -129,7 +133,7 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     /**
-     * 通过订单项id查询订单
+     * 通过订单项id查询订单项
      * @param id
      * @return
      */
@@ -167,6 +171,11 @@ public class OrdersServiceImpl implements OrdersService {
         order.setEmail(ordersVo.getEmail());
         order.setOrderNotes(ordersVo.getOrderNotes());
         order.setPhone(ordersVo.getPhone());
+
+        order.setZip(ordersVo.getZip());
+        order.setState(ordersVo.getState());
+        order.setCity(ordersVo.getCity());
+        order.setAddress(ordersVo.getAddress());
         order.setShippingOption(ordersVo.getShippingOption());
         order.setOrderStatus("0");
         order.setTotal(ordersVo.getTotal());
