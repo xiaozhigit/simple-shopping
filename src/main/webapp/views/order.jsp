@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="<%=path%>/static/bootstrap/lightbox.min.css">
     <link rel="stylesheet" href="<%=path%>/static/bootstrap/style.css?v=44">
     <link rel="stylesheet" href="<%=path%>/static/css/iconfont.css?v=44">
+    <link rel="stylesheet" href="<%=path%>/static/css/bottom_menu_style.css?v=49">
 
     <link rel="apple-touch-icon" sizes="57x57" href="<%=path%>/static/bootstrapfavicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="<%=path%>/static/bootstrap/favicon/apple-icon-60x60.png">
@@ -44,22 +45,33 @@
 </head>
 
 <body>
-<!-- Header -->
-<%--<div id="header-wrapper">--%>
-<%--    <header id="header" class="container">--%>
-<%--        <!-- 导航菜单-->--%>
-<%--        <nav id="nav">--%>
-<%--            <ul>--%>
-<%--                <li class="current"><a href="/">Home</a></li>--%>
-<%--                <c:forEach var="categorie" items="${categories}"  varStatus="s">--%>
-<%--                    <li><a href="#${categorie.name}">${categorie.name}</a></li>--%>
-<%--                </c:forEach>--%>
-<%--            </ul>--%>
+<!--↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓3列菜单开始↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓-->
+<div class="btn3 clearfix">
+    <div class="menu">
+        <div class="bt-name"><a href="#top">回到頂部</a></div>
+    </div><!--menu-->
+    <div class="menu" >
+        <div class="bt-name">类別</div>
+        <div class="sanjiao"></div>
+        <div  class="new-sub">
+            <ul>
+                <c:forEach var="categorie" items="${categories}"  varStatus="s">
+                    <li><a href="#${categorie.name}">${categorie.name}</a></li>
+                 </c:forEach>
+            </ul>
+            <div class="tiggle"></div>
+            <div class="innertiggle"></div>
+        </div>
+    </div>
+    <div class="menu">
+        <div class="bt-name"> <a  href="#add_order">下单</a></div>
+    </div>
+</div>
+</div>
+<!--↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑3列菜单end↑↑↑↑↑↑↑↑↑↑↑↑↑↑-->
 
-<%--        </nav>--%>
-<%--    </header>--%>
-<%--</div>--%>
     <form  method="post" οnsubmit="return false;">
+        <a name="top"></a>
         <div class="container-fluid mt-5">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-12 col-lg-8 mb-5">
@@ -79,7 +91,8 @@
                                 <tbody>
                                 <c:forEach var="categorie" items="${categories}"  varStatus="s">
                                     <tr class="categories">
-                                        <td class="categories text-center text-primary" colspan="5"><c:out value="${categorie.name}" /></td>
+
+                                        <td class="categories text-center text-primary" colspan="5"> <a name="${categorie.name}">${categorie.name} </a></td>
                                     </tr>
                                     <c:forEach var="product" items="${categorie.products}"  varStatus="s">
                                         <tr class="rimproducts">
@@ -124,6 +137,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Order Informations</h5>
+                            <a name="add_order"></a>
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" class="form-control" value="" name="name" id="name" placeholder="Please Enter Your Name">
@@ -329,9 +343,21 @@
                 return false;
             }
         }
+
+        //弹出垂直菜单
+        $(".menu").click(function() {
+            if ($(this).hasClass("cura")) {
+                $(this).children(".new-sub").hide(); //当前菜单下的二级菜单隐藏
+                $(".menu").removeClass("cura"); //同一级的菜单项
+            } else {
+                $(".menu").removeClass("cura"); //移除所有的样式
+                $(this).addClass("cura"); //给当前菜单添加特定样式
+                $(".menu").children(".new-sub").slideUp("fast"); //隐藏所有的二级菜单
+                $(this).children(".new-sub").slideDown("fast"); //展示当前的二级菜单
+            }
+        });
     </script>
     <script src="<%=path%>/static/bootstrap/lightbox.min.js"></script>
     <script src="<%=path%>/static/bootstrap/bootstrap.min.js"></script>
-
 </body>
 </html>
